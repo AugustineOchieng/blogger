@@ -1,0 +1,11 @@
+{% extends 'base.html'%}
+{%import 'macros.html' as macro%}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <h3>Recent Posts</h3>
+    {{macro.displayBlogs(blogs)}}
+  </div>
+</div>
+{% endblock %}

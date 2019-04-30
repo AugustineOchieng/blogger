@@ -1,27 +1,113 @@
 {% extends 'base.html' %}
-{% block content %}
 {% block styles %}
 {{ super() }}
 <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
 
-{{ endblock  }}
-<!DOCTYPE html>
-<html>
+{% endblock  %}
+{% block content %}
+<div class="center" style="text-align:center;">
+<p><i class="fas fa-quote-left"></i> {{quote}}</p>
+<p>{{quote_author}}</p>
+</div>
 
-<head>
-  <meta charset="utf-8">
-  {% if title %}
-  <title> {{ title }}</title>
-  {% else %}
-  <title> Welcome to my personal blogging website </title>
-  {% endif %}
-</head>
+<section class="cards-wrapper">
+  <div class="card-grid-space">
 
-<body>
-<!-- Lifestyle Blogs -->
-<h3>Lifestyle</h3>
-<p>Enjoy life while you can!</p>
-</body>
+    <a class="card" href="/blogs/travel" style="--bg-img:
+      url(https://s2.germany.travel/media/hintergrundbilder/startseite_1/BG_Bayern.jpg)">
+      <div>
+        <h1>Travel</h1>
+        <p>Because in the end, you won’t remember the time you spent working in the office or mowing your lawn. Climb
+          that goddamn mountain.</p>
+        <div class="date">6 Oct 2017</div>
+        <div class="tags">
+          <div class="tag">Travel</div>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="card-grid-space">
+
+    <a class="card" href="/blogs/lifestyle"
+      style="--bg-img: url('https://blog.holidaylettings.co.uk/wp-content/uploads/2015/04/lifestyle.jpg')">
+      <div>
+        <h1>Lifestyle</h1>
+        <p>Find cutting edge life hacks to and techniques to elevate your life...</p>
+        <div class="date">9 Oct 2017</div>
+        <div class="tags">
+          <div class="tag">lifestyle</div>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="card-grid-space">
+
+    <a class="card" href="/blogs/entertainment"
+      style="--bg-img: url('https://www.lebureauexport.fr/wp-content/uploads/2019/01/main_900.jpg')">
+      <div>
+        <h1>Entertainment</h1>
+        <p>Be in the know on the latest gossip that keeps the entertainment industry going.</p>
+        <div class="date">14 Oct 2017</div>
+        <div class="tags">
+          <div class="tag">entertainment</div>
+        </div>
+      </div>
+    </a>
+  </div>
+  <!-- https://images.unsplash.com/photo-1520839090488-4a6c211e2f94?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=38951b8650067840307cba514b554ba5&auto=format&fit=crop&w=1350&q=80 -->
+</section>
+
+<!-- Card -->
+
+<section class="cards-wrapper">
+  <div class="card-grid-space">
+
+    <a class="card" href="/blogs/science" style="--bg-img:
+      url(http://brandconnections.com/wp-content/uploads/2015/07/shutterstock_261911066.jpg)">
+      <div>
+        <h1>Science & Technology</h1>
+        <p>If we knew what it was we were doing, it would not be called research, would it?</p>
+        <div class="date">6 Oct 2017</div>
+        <div class="tags">
+          <div class="tag">science</div>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="card-grid-space">
+
+    <a class="card" href="/blogs/politics"
+      style="--bg-img:
+      url('https://www.retailgazette.co.uk/wp/wp-content/uploads/When-should-retailers-get-involved-in-politics.jpeg')">
+      <div>
+        <h1>Politics</h1>
+        <p>A paranoid is someone who knows a little of what's going on. Let us be your informant...</p>
+        <div class="date">9 Oct 2017</div>
+        <div class="tags">
+          <div class="tag">politics</div>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="card-grid-space">
+
+    <a class="card" href="/blogs/sports"
+      style="--bg-img:
+      url('https://www.myactivesg.com/~/media/Consumer/Images/Sports/Thumbnails%20for%20Sports%20Landing%20Page/Football%20Sport%20Thumbnail%20600x400.jpg')">
+      <div>
+        <h1>Sports</h1>
+        <p>You miss 100% of the shots you don’t take. Take this shot and you will never miss another....</p>
+        <div class="date">14 Oct 2017</div>
+        <div class="tags">
+          <div class="tag">sports</div>
+        </div>
+      </div>
+    </a>
+  </div>
+  <!-- https://images.unsplash.com/photo-1520839090488-4a6c211e2f94?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=38951b8650067840307cba514b554ba5&auto=format&fit=crop&w=1350&q=80 -->
+</section>
+
+<!-- Card -->
+
+
 {% endblock %}
-
-</html>

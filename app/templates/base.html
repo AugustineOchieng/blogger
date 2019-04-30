@@ -1,4 +1,26 @@
-{% extends 'bootstrap/base.html' %}
+{% extends 'bootstrap/base.html'%}
+
+<!-- Navbar block  -->
 {% block navbar %}
-{ %include ' navbar.html' % }
+{% include 'navbar.html' %}
+{% endblock %}
+
+{% block content %}
+{% block styles %}
+{{super}}
+ <!--Importing the simple mde css and js files  -->
+ {{ simplemde.css}}
+ {{ simplemde.js }}
+<link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.css')}}">
+
+<link rel="stylesheet" href="{{url_for('static',filename='css/mdb.css')}}">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.7/css/mdb.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Arapey|Cinzel|Dosis" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+
+{% endblock %}
 {% endblock %}
