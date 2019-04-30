@@ -1,8 +1,5 @@
-export SECRET_KEY="augustine"
+export SECRET_KEY="warble"
 
 export MAIL_USERNAME="gustin9tis@gmail.com"
-export MAIL_PASSWORD="gus9999#"
-
-export DATABASE_URL='postgresql+psycopg2://moringa:augustine@localhost/blogger'
-
+export MAIL_PASSWORD="wonderopolis"
 python3.6 manage.py server

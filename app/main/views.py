@@ -1,27 +1,29 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
-from ..models import User,Blogs,Comments, Subscriber
+from ..models import User,Blog,Comments, Subscriber
 from .. import db,photos
 from .forms import UpdateProfile,BlogForm,CommentForm, SubscriberForm
 from flask_login import login_required,current_user
 import datetime
 from ..email import mail_message
+from ..requests import random_post
 
 
 @main.route('/')
 def index():
     lifestyle = Blog.get_blogs('lifestyle')
     travel = Blog.get_blogs('travel')
+    sports = Blog.get_blogs('sports')
+    entertainment = Blog.get_blogs('entertainment')
+    politics = Blog.get_blogs('politics')
+    science = Blog.get_blogs('science')
+    gustin = random_post()
+    quote = gustin['quote']
+    quote_author = gustin['author']
+    categories = Blog.get_blogs('categories')
     
 
-    return render_template('index.html', title = 'BumbleBee - Home', lifestyle = lifestyle, travel = travel)
-
-@main.route('/blogs/travel')
-def travel():
-    blogs = Blog.get_blogs('travel')
-
-    return render_template('travel.html',blogs = blogs)
-
+    return render_template('index.html', title = 'Bloggeropolis - Home', lifestyle = lifestyle, travel = travel,science = science, politics = politics, entertainment = entertainment, sports = sports, quote = quote, quote_author = quote_author, categories = categories)
 
 @main.route('/blogs/lifestyle')
 def lifestyle():
@@ -29,6 +31,42 @@ def lifestyle():
 
     return render_template('lifestyle.html',blogs = blogs)
 
+
+@main.route('/blogs/travel')
+def travel():
+    blogs = Blog.get_blogs('travel')
+
+    return render_template('travel.html',blogs = blogs)
+
+@main.route('/blogs/sports')
+def sports():
+    blogs = Blog.get_blogs('sports')
+
+    return render_template('sports.html',blogs = blogs)
+
+@main.route('/blogs/science')
+def science():
+    blogs = Blog.get_blogs('science')
+
+    return render_template('science.html', blogs=blogs)
+    
+@main.route('/blogs/entertainment')
+def entertainment():
+    blogs = Blog.get_blogs('entertainment')
+
+    return render_template('entertainment.html', blogs=blogs)
+    
+@main.route('/blogs/politics')
+def politics():
+    blogs = Blog.get_blogs('politics')
+
+    return render_template('politics.html', blogs=blogs)
+    
+@main.route('/blogs/categories')
+def categories():
+    blogs = Blog.get_blogs('categories')
+
+    return render_template('categories.html',blogs = blogs)
 
 @main.route('/user/<uname>')
 def profile(uname):
@@ -86,11 +124,11 @@ def new_blog():
 
         subscriber = Subscriber.query.all()
         for email in subscriber:
-            mail_message("New Blog Post from BumbleBee! ","email/postnotification",email.email,subscriber=subscriber)
+            mail_message("New Blog Post from B! ","email/postnotification",email.email,subscriber=subscriber)
         return redirect(url_for('main.index'))
 
     title = 'New Blog'
-    return render_template('new_blog.html', legend = legend, title = title, blog_form = form)
+    return render_template('new_blog.html', head = head, title = title, blog_form = form)
 
 @main.route('/blog/delete/<int:id>', methods = ['GET', 'POST'])
 @login_required
@@ -155,7 +193,7 @@ def subscriber():
 
         mail_message("Welcome to BumbleBee","email/welcome_subscriber",subscriber.email,subscriber=subscriber)
 
-        title= "BumbleBee"
+        title= "Bloggeropolis"
         return render_template('index.html',title=title, blogs=blogs)
 
     subscriber = Blog.query.all()

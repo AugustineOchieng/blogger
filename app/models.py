@@ -18,7 +18,7 @@ class User(UserMixin,db.Model):
     password_hash = db.Column(db.String(255))
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
-    blog = db.relationship('Blogs', backref='username', lazy='dynamic')
+    blog = db.relationship('Blog', backref='username', lazy='dynamic')
     comments = db.relationship('Comments', backref='username', lazy='dynamic')
 
 #to link tables what you add after backreft matters
@@ -36,23 +36,13 @@ class User(UserMixin,db.Model):
     def __repr__(self):
         return f'Username: {self.username}'
 
-class Role(db.Model):
-    __tablename__ = 'roles'
 
-    id = db.Column(db.Integer,primary_key = True)
-    name = db.Column(db.String(255))
-    users = db.relationship('User',backref = 'role',lazy="dynamic")
-
-    def __repr__(self):
-        return f'User {self.name}'
-
-class Blogs(db.Model):
-    __tablename__= 'blogs'
+class Blog(db.Model):
+    __tablename__= 'blog'
     id = db.Column(db.Integer,primary_key = True)
     title = db.Column(db.String(255))
     category = db.Column(db.String(255))
     blog = db.Column(db.String(255))
-    role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
     date = db.Column(db.DateTime(250), default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     comments = db.relationship('Comments', backref='title', lazy='dynamic')
@@ -61,20 +51,26 @@ class Blogs(db.Model):
         db.session.add(self)
         db.session.commit()
 
+   
     @classmethod
-    def get_blogs(cls,cate):
-        blog = Blogs.query.filter_by(category=cate).all()
+    def get_blogs(cls,category):
+        blog = Blog.query.filter_by(category = category).all()
         return blog
 
+    @classmethod
+    def get_blog(cls,id):
+        blog = Blog.query.filter_by(id = id).first()
+
+        return blog
     def __repr__(self):
-        return f"Blogs {self.blog}','{self.date}')"
+        return f"Blog {self.blog}','{self.date}')"
 
 class Comments(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
     comment = db.Column(db.String(255))
     date_posted = db.Column(db.DateTime(250), default=datetime.utcnow)
-    blogs_id = db.Column(db.Integer, db.ForeignKey("blogs.id"))
+    blog_id = db.Column(db.Integer, db.ForeignKey("blog.id"))
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
 
     def save_comment(self):
@@ -83,7 +79,7 @@ class Comments(db.Model):
 
     @classmethod
     def get_comment(cls,id):
-        comments = Comments.query.filter_by(pitches_id=id).all()
+        comments = Comments.query.filter_by(blog_id=id).all()
         return comments
 
     def __repr__(self):

@@ -8,8 +8,8 @@ from ..email import mail_message
 
 user = [
     {
-        'email':'admin@blog.com',
-        'password':'admin098'
+        'email':'gustin@gmail.com',
+        'password':'gus'
     }
 ]
 
@@ -25,7 +25,7 @@ def login():
 
         flash('Invalid author or password')
 
-    title = 'BumbleBee Login'
+    title = 'Bloggeropolis Login'
     return render_template('auth/login.html', title = title, login_form = form)
 
 
@@ -43,7 +43,7 @@ def register():
         db.session.add(user)
         db.session.commit()
 
-        # mail_message('Welcome to the Pitch App', 'email/welcome_user',user.email,user = user)
+      
         return redirect(url_for('auth.login'))
         title = 'New Account'
     return render_template('auth/register.html', registration_form = form)
