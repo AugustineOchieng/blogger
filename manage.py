@@ -6,7 +6,7 @@ from app.models import User, Blog, Comments
 
 # app = create_app("development")
 app = create_app('production')
-app.config['SQLALCHEMY_DATABASE_URI']= "postgresql+psycopg2://moringa:augustine@localhost/blogger"
+
 
 manager = Manager(app)
 manager.add_command("server", Server)
@@ -20,6 +20,8 @@ def make_shell_context():
 
 migrate = Migrate(app, db)
 manager.add_command("db", MigrateCommand)
+
+
 
 if __name__ == "__main__":
     app.secret_key = 'warble'
