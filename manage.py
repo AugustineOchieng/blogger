@@ -6,6 +6,7 @@ from app.models import User, Blog, Comments
 
 # app = create_app("development")
 app = create_app('production')
+app.config['SQLALCHEMY_DATABASE_URI']= "postgresql+psycopg2://moringa:augustine@localhost/blogger"
 
 manager = Manager(app)
 manager.add_command("server", Server)
