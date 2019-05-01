@@ -6,6 +6,7 @@ from . import login_manager
 from datetime import datetime
 #...
 
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -20,6 +21,7 @@ class User(UserMixin,db.Model):
     profile_pic_path = db.Column(db.String())
     blog = db.relationship('Blog', backref='username', lazy='dynamic')
     comments = db.relationship('Comments', backref='username', lazy='dynamic')
+    pass_secure = db.Column(db.String(255))
 
 #to link tables what you add after backreft matters
     @property
